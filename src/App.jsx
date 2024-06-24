@@ -37,12 +37,11 @@ export default function App() {
       <div className="w-full p-4 bg-white shadow-md rounded-md flex">
         <div className="w-1/4 p-4 bg-white shadow-md rounded-md">
           <Headers headerText="Your Projects" />
-          <button
+          <Button
             className="rounded-lg bg-slate-600"
             onClick={handleOpenFormClick}
-          >
-            Create new project
-          </button>
+            text="Create new project"
+          />
 
           {taskCreated &&
             tasks.map((task) => (
@@ -59,12 +58,7 @@ export default function App() {
               <InputResult ref={projectName} type="text" label="Your Name" />
               <TextArea ref={projectDescription} label="Your Description" />
               <div className="flex items-center justify-between">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  onClick={handleFormInputClick}
-                >
-                  Add Project
-                </button>
+                <Button onClick={handleFormInputClick} text="Add Project" />
               </div>
             </>
           )}

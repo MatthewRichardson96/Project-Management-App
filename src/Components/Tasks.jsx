@@ -1,4 +1,3 @@
-import Dashboard from "./Dashboard";
 import { useState } from "react";
 
 export default function Tasks({ taskName, taskDescription }) {
