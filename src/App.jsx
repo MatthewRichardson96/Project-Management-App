@@ -21,6 +21,7 @@ export default function App() {
   }
 
   function handleFormInputClick() {
+    console.log("projectName is: ", projectName.current.value);
     setTaskDescription(projectDescription.current.value);
     setTaskName(projectName.current.value);
     tasks.push({
@@ -38,7 +39,7 @@ export default function App() {
         <div className="w-1/4 p-4 bg-white shadow-md rounded-md">
           <Headers headerText="Your Projects" />
           <Button
-            className="rounded-lg bg-slate-600"
+            // className="bg-blue-300 rounded h-10 text-center content-center"
             onClick={handleOpenFormClick}
             text="Create new project"
           />
@@ -63,8 +64,8 @@ export default function App() {
             </>
           )}
         </div>
-        <div className="dashboard-container">
-          <Dashboard tasks={tasks} className="w-1/2" />
+        <div className="w-1/2 p-4">
+          <Dashboard tasks={tasks} />
         </div>
       </div>
     </>
