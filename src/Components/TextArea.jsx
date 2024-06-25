@@ -4,13 +4,14 @@ import { styled } from "styled-components";
 const Label = styled.label`
   background-color: #3182ce;
   color: white;
-  padding: 0.5rem 1rem;
   border-radius: 0.25rem;
+  margin-top: 1rem;
 `;
 const TextAreas = styled.textarea`
   background-color: #edf2f7;
   border-radius: 0.25rem;
   width: 100%;
+  margin-top: 1rem;
 `;
 const TextArea = forwardRef(function DefaultTextArea({ label, ...props }, ref) {
   return (

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import Button from "./Button";
 
 const Buttons = styled.button`
   background-color: #3182ce;
   color: white;
   padding: 0.5rem 1rem;
+  margin: 0.5rem;
   border-radius: 0.25rem;
   cursor: pointer;
   font-size: 1rem;
@@ -26,14 +26,10 @@ export default function Tasks({ taskName, taskDescription }) {
     });
     setTask(taskName);
   }
+
   return (
     <>
-      <Buttons
-        onClick={handleClick}
-        className="p-2 bg-gray-200 rounded-md w-full"
-      >
-        {taskName}
-      </Buttons>
+      <Buttons onClick={handleClick}>{taskName}</Buttons>
       <div className="dashboard-container">
         {
           isClicked ? (

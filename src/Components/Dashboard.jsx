@@ -23,17 +23,21 @@ export default function Dashboard({ tasks }) {
   return (
     <Div>
       <Header headerText="Dashboard" paragraph="Welcome to the dashboard" />
-      <H3 className="mt-8 text-xl font-bold text-center">
-        No Project Selected
-      </H3>
-      <Paragraph>Select a project or get started with a new one</Paragraph>
-      <Paragraph>task name is {tasks}</Paragraph>
-      {tasks &&
+
+      {tasks ? (
         tasks.map((task) => (
           <ul key={task.name}>
             <Tasks taskName={task.name} taskDescription={task.description} />
           </ul>
-        ))}
+        ))
+      ) : (
+        <>
+          <H3 className="mt-8 text-xl font-bold text-center">
+            No Project Selected
+          </H3>
+          <Paragraph>Select a project or get started with a new one</Paragraph>
+        </>
+      )}
     </Div>
   );
 }

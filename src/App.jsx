@@ -4,16 +4,19 @@ import Headers from "./Components/Header";
 import InputResult from "./Components/Input";
 import TextArea from "./Components/TextArea";
 import Button from "./Components/Button";
-
 import { useRef, useState } from "react";
+
 let tasks = [];
+
 export default function App() {
   const projectName = useRef();
   const projectDescription = useRef();
+
   const [isClicked, setIsClicked] = useState(false);
   const [taskCreated, setTaskCreated] = useState(false);
   const [taskName, setTaskName] = useState();
   const [taskDescription, setTaskDescription] = useState();
+  const [taskDeleted, setTaskDeleted] = useState();
 
   function handleOpenFormClick() {
     setTaskCreated(false);
@@ -21,7 +24,6 @@ export default function App() {
   }
 
   function handleFormInputClick() {
-    console.log("projectName is: ", projectName.current.value);
     setTaskDescription(projectDescription.current.value);
     setTaskName(projectName.current.value);
     tasks.push({
@@ -31,6 +33,18 @@ export default function App() {
     console.log("task is: ", tasks);
     setTaskCreated(true);
     setIsClicked(false);
+    setTaskDeleted(true);
+  }
+
+  function handleDeleteClick(taskName) {
+    console.log("pre tasks", tasks);
+
+    const newTaskList = tasks.filter((item) => {
+      item.taskName !== taskName;
+    });
+    tasks = newTaskList;
+    console.log("post tasks", tasks);
+    setTaskDeleted(false);
   }
 
   return (
@@ -38,13 +52,9 @@ export default function App() {
       <div className="w-full p-4 bg-white shadow-md rounded-md flex">
         <div className="w-1/4 p-4 bg-white shadow-md rounded-md">
           <Headers headerText="Your Projects" />
-          <Button
-            // className="bg-blue-300 rounded h-10 text-center content-center"
-            onClick={handleOpenFormClick}
-            text="Create new project"
-          />
+          <Button onClick={handleOpenFormClick} text="Create new project" />
 
-          {taskCreated &&
+          {/* {taskCreated &&
             tasks.map((task) => (
               <ul key={task.name}>
                 <Tasks
@@ -52,7 +62,7 @@ export default function App() {
                   taskDescription={task.description}
                 />
               </ul>
-            ))}
+            ))} */}
 
           {isClicked && (
             <>
@@ -66,6 +76,13 @@ export default function App() {
         </div>
         <div className="w-1/2 p-4">
           <Dashboard tasks={tasks} />
+          {/* {taskCreated && taskDeleted && (
+            <Button
+              onClick={handleDeleteClick}
+              task={projectName}
+              text="Delete"
+            />
+          )} */}
         </div>
       </div>
     </>

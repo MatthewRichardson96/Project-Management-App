@@ -5,6 +5,8 @@ const Buttons = styled.button`
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;

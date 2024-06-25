@@ -6,6 +6,7 @@ const Label = styled.label`
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
+
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
