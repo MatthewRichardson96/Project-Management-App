@@ -7,16 +7,20 @@ import Button from "./Components/Button";
 import { useRef, useState } from "react";
 
 let tasks = [];
+let selectedTask;
 
 export default function App() {
   const projectName = useRef();
   const projectDescription = useRef();
 
   const [isClicked, setIsClicked] = useState(false);
+  const [projectSelected, setProjectSelected] = useState(false);
   const [taskCreated, setTaskCreated] = useState(false);
   const [taskName, setTaskName] = useState();
   const [taskDescription, setTaskDescription] = useState();
   const [taskDeleted, setTaskDeleted] = useState();
+
+  const [task, setTask] = useState();
 
   function handleOpenFormClick() {
     setTaskCreated(false);
@@ -30,7 +34,7 @@ export default function App() {
       name: projectName.current.value,
       description: projectDescription.current.value,
     });
-    console.log("task is: ", tasks);
+
     setTaskCreated(true);
     setIsClicked(false);
     setTaskDeleted(true);
@@ -47,6 +51,29 @@ export default function App() {
     setTaskDeleted(false);
   }
 
+  function handleTaskSelection(task) {
+    console.log("task is: ", task);
+    setProjectSelected((func) => {
+      return !func;
+    });
+    setTask(task);
+  }
+
+  function handleEditClick() {
+    const updatedTask = {
+      ...task,
+      name: "Updated Task Name",
+      description: "Updated Task Description",
+    };
+    // Update the tasks array with the updated task
+    const updatedTasks = tasks.map((t) =>
+      t.name === task.name ? updatedTask : t
+    );
+    tasks = updatedTasks;
+    // Set the taskCreated state to false to hide the form
+    setTaskCreated(false);
+  }
+
   return (
     <>
       <div className="w-full p-4 bg-white shadow-md rounded-md flex">
@@ -54,15 +81,20 @@ export default function App() {
           <Headers headerText="Your Projects" />
           <Button onClick={handleOpenFormClick} text="Create new project" />
 
-          {/* {taskCreated &&
-            tasks.map((task) => (
-              <ul key={task.name}>
-                <Tasks
-                  taskName={task.name}
-                  taskDescription={task.description}
-                />
-              </ul>
-            ))} */}
+          {
+            (selectedTask =
+              taskCreated &&
+              tasks.map((task) => (
+                <ul key={task.name}>
+                  <Tasks
+                    taskName={task.name}
+                    taskDescription={task.description}
+                    onClick={() => handleTaskSelection(task)}
+                    isClicked={projectSelected}
+                  />
+                </ul>
+              )))
+          }
 
           {isClicked && (
             <>
@@ -75,14 +107,20 @@ export default function App() {
           )}
         </div>
         <div className="w-1/2 p-4">
-          <Dashboard tasks={tasks} />
-          {/* {taskCreated && taskDeleted && (
-            <Button
-              onClick={handleDeleteClick}
-              task={projectName}
-              text="Delete"
-            />
-          )} */}
+          {projectSelected ? (
+            <>
+              <Dashboard tasks={task} selectedTask={projectSelected} />
+              <Button onClick={handleEditClick} text="Edit" />
+
+              <Button
+                onClick={handleDeleteClick}
+                task={projectName}
+                text="Delete"
+              />
+            </>
+          ) : (
+            <Dashboard />
+          )}
         </div>
       </div>
     </>

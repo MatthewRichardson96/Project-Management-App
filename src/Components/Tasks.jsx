@@ -16,21 +16,26 @@ const Buttons = styled.button`
   }
 `;
 
-export default function Tasks({ taskName, taskDescription }) {
-  const [isClicked, setIsClicked] = useState();
-  const [task, setTask] = useState();
+export default function Tasks({
+  taskName,
+  taskDescription,
+  onClick,
+  isClicked,
+}) {
+  // const [isClicked, setIsClicked] = useState();
+  // const [task, setTask] = useState();
 
-  function handleClick() {
-    setIsClicked((func) => {
-      return !func;
-    });
-    setTask(taskName);
-  }
+  // function handleClick() {
+  //   setIsClicked((func) => {
+  //     return !func;
+  //   });
+  //   setTask(taskName);
+  // }
 
   return (
     <>
-      <Buttons onClick={handleClick}>{taskName}</Buttons>
-      <div className="dashboard-container">
+      <Buttons onClick={onClick}>{taskName}</Buttons>
+      {/* <div>
         {
           isClicked ? (
             <p>
@@ -38,7 +43,7 @@ export default function Tasks({ taskName, taskDescription }) {
             </p>
           ) : undefined // This is your default dashboard text
         }
-      </div>
+      </div> */}
     </>
   );
 }

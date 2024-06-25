@@ -1,5 +1,4 @@
 import Header from "./Header";
-import Tasks from "./Tasks";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -19,17 +18,14 @@ const Paragraph = styled.p`
   font-weight: 400;
 `;
 
-export default function Dashboard({ tasks }) {
+export default function Dashboard({ tasks, selectedTask }) {
   return (
     <Div>
       <Header headerText="Dashboard" paragraph="Welcome to the dashboard" />
-
-      {tasks ? (
-        tasks.map((task) => (
-          <ul key={task.name}>
-            <Tasks taskName={task.name} taskDescription={task.description} />
-          </ul>
-        ))
+      {selectedTask ? (
+        <ul key={tasks.name}>
+          <p>{tasks.description}</p>
+        </ul>
       ) : (
         <>
           <H3 className="mt-8 text-xl font-bold text-center">
