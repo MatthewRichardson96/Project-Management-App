@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { styled } from "styled-components";
 
 const Buttons = styled.button`
@@ -16,34 +15,10 @@ const Buttons = styled.button`
   }
 `;
 
-export default function Tasks({
-  taskName,
-  taskDescription,
-  onClick,
-  isClicked,
-}) {
-  // const [isClicked, setIsClicked] = useState();
-  // const [task, setTask] = useState();
-
-  // function handleClick() {
-  //   setIsClicked((func) => {
-  //     return !func;
-  //   });
-  //   setTask(taskName);
-  // }
-
+export default function Tasks({ taskName, onClick }) {
   return (
     <>
       <Buttons onClick={onClick}>{taskName}</Buttons>
-      {/* <div>
-        {
-          isClicked ? (
-            <p>
-              {taskName}: {taskDescription}
-            </p>
-          ) : undefined // This is your default dashboard text
-        }
-      </div> */}
     </>
   );
 }
