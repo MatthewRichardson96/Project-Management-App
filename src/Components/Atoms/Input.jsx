@@ -18,13 +18,25 @@ const Inputs = styled.input`
   width: 100%;
 `;
 
-const InputResult = forwardRef(function Input({ label, ...props }, ref) {
+const InputResult = forwardRef(function Input(
+  { label, isEditable, onChange, ...props },
+  ref
+) {
   return (
     <p className="control">
       <Label className="bg-indigo-500 rounded text-center w-auto h-auto">
         {label}
       </Label>
-      <Inputs className="bg-slate-400 rounded w-full" ref={ref} {...props} />
+      {isEditable ? (
+        <Inputs
+          className="bg-slate-400 rounded w-full"
+          ref={ref}
+          {...props}
+          onChange={onChange}
+        />
+      ) : (
+        <Inputs className="bg-slate-400 rounded w-full" ref={ref} {...props} />
+      )}
     </p>
   );
 });

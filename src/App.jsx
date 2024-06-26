@@ -1,9 +1,9 @@
-import Dashboard from "./Components/Dashboard";
-import Tasks from "./Components/Tasks";
-import Headers from "./Components/Header";
-import InputResult from "./Components/Input";
-import TextArea from "./Components/TextArea";
-import Button from "./Components/Button";
+import Dashboard from "./Components/Molecules/Dashboard";
+import Tasks from "./Components/Atoms/Tasks";
+import Headers from "./Components/Atoms/Header";
+import InputResult from "./Components/Atoms/Input";
+import TextArea from "./Components/Atoms/TextArea";
+import Button from "./Components/Atoms/Button";
 import { useRef, useState } from "react";
 
 let tasks = [];
@@ -14,12 +14,13 @@ export default function App() {
   const projectDescription = useRef();
 
   const [isClicked, setIsClicked] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
   const [projectSelected, setProjectSelected] = useState(false);
   const [taskCreated, setTaskCreated] = useState(false);
+
   const [taskName, setTaskName] = useState();
   const [taskDescription, setTaskDescription] = useState();
   const [taskDeleted, setTaskDeleted] = useState();
-
   const [task, setTask] = useState();
 
   function handleOpenFormClick() {
@@ -60,18 +61,28 @@ export default function App() {
   }
 
   function handleEditClick() {
-    const updatedTask = {
-      ...task,
-      name: "Updated Task Name",
-      description: "Updated Task Description",
-    };
-    // Update the tasks array with the updated task
-    const updatedTasks = tasks.map((t) =>
-      t.name === task.name ? updatedTask : t
-    );
+    console.log("value is: ", task.name);
+    setIsEditable(true);
+  }
+
+  function handleEditUpdateClick() {
+    console.log("value is: ", projectName.current.value);
+
+    setTaskName(projectName.current.value);
+    setTaskDescription(projectDescription.current.value);
+
+    const updatedTasks = tasks.map((t) => {
+      if (t.name === task.name) {
+        return {
+          name: projectName.current.value,
+          description: projectDescription.current.value,
+        };
+      }
+      return t;
+    });
+
     tasks = updatedTasks;
-    // Set the taskCreated state to false to hide the form
-    setTaskCreated(false);
+    setIsEditable(false);
   }
 
   return (
@@ -96,7 +107,7 @@ export default function App() {
               )))
           }
 
-          {isClicked && (
+          {isClicked ? (
             <>
               <InputResult ref={projectName} type="text" label="Your Name" />
               <TextArea ref={projectDescription} label="Your Description" />
@@ -104,7 +115,26 @@ export default function App() {
                 <Button onClick={handleFormInputClick} text="Add Project" />
               </div>
             </>
-          )}
+          ) : isEditable ? (
+            <>
+              <InputResult
+                ref={projectName}
+                type="text"
+                label="Your Name"
+                isEditable={isEditable}
+                onChange={(e) => setTaskName(e.target.value)}
+              />
+              <TextArea
+                ref={projectDescription}
+                label="Your Description"
+                isEditable={isEditable}
+                onChange={(e) => setTaskDescription(e.target.value)}
+              />
+              <div className="flex items-center justify-between">
+                <Button onClick={handleEditUpdateClick} text="Update Project" />
+              </div>
+            </>
+          ) : undefined}
         </div>
         <div className="w-1/2 p-4">
           {projectSelected ? (

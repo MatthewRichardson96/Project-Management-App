@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Header from "../Atoms/Header";
 import styled from "styled-components";
 
 const Div = styled.div`

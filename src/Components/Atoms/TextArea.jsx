@@ -13,11 +13,23 @@ const TextAreas = styled.textarea`
   width: 100%;
   margin-top: 1rem;
 `;
-const TextArea = forwardRef(function DefaultTextArea({ label, ...props }, ref) {
+const TextArea = forwardRef(function DefaultTextArea(
+  { label, isEditable, onChange, ...props },
+  ref
+) {
   return (
     <>
       <Label className="bg-fuchsia-400">{label}</Label>
-      <TextAreas className="bg-green-500 w-full h-16" ref={ref} {...props} />
+      {isEditable ? (
+        <TextAreas
+          className="bg-green-500 w-full h-16"
+          ref={ref}
+          onChange={onChange}
+          {...props}
+        />
+      ) : (
+        <TextAreas className="bg-green-500 w-full h-16" ref={ref} {...props} />
+      )}
     </>
   );
 });
