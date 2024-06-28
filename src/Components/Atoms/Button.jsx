@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-const Buttons = styled.button`
+const ButtonStyle = styled.button`
   background-color: #3182ce;
   color: white;
   padding: 0.5rem 1rem;
@@ -17,5 +17,9 @@ const Buttons = styled.button`
 `;
 
 export default function Button({ onClick, text }) {
-  return <Buttons onClick={onClick}>{text}</Buttons>;
+  return (
+    <ButtonStyle data-testid="button-test" onClick={onClick}>
+      {text}
+    </ButtonStyle>
+  );
 }
