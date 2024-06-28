@@ -13,7 +13,9 @@ const Paragraph = styled.p`
 export default function Header({ headerText, paragraph }) {
   return (
     <>
-      <H2 className="text-2xl font-bold text-center">{headerText}</H2>
+      <H2 data-testid="header" className="text-2xl font-bold text-center">
+        {headerText}
+      </H2>
       {paragraph && (
         <Paragraph className="mt-4 text-center">{paragraph}</Paragraph>
       )}

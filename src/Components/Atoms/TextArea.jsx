@@ -22,6 +22,7 @@ const TextArea = forwardRef(function DefaultTextArea(
       <Label className="bg-fuchsia-400">{label}</Label>
       {isEditable ? (
         <TextAreas
+          data-testid="textarea-test"
           className="bg-green-500 w-full h-16"
           ref={ref}
           onChange={onChange}

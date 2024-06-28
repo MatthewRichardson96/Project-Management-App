@@ -1,5 +1,5 @@
 import Dashboard from "./Components/Molecules/Dashboard";
-import Tasks from "./Components/Atoms/Tasks";
+import Tasks from "./Components/Molecules/Tasks";
 import Headers from "./Components/Atoms/Header";
 import InputResult from "./Components/Atoms/Input";
 import TextArea from "./Components/Atoms/TextArea";

@@ -24,11 +24,15 @@ const InputResult = forwardRef(function Input(
 ) {
   return (
     <p className="control">
-      <Label className="bg-indigo-500 rounded text-center w-auto h-auto">
+      <Label
+        data-testid="label"
+        className="bg-indigo-500 rounded text-center w-auto h-auto"
+      >
         {label}
       </Label>
       {isEditable ? (
         <Inputs
+          data-testid="input"
           className="bg-slate-400 rounded w-full"
           ref={ref}
           {...props}
