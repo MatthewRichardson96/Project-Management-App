@@ -16,7 +16,7 @@ const ButtonStyle = styled.button`
   }
 `;
 
-export default function Button({ onClick, text }) {
+export default function Button({ text, onClick }) {
   return (
     <ButtonStyle data-testid="button-test" onClick={onClick}>
       {text}

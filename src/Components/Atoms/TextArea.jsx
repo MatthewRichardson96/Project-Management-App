@@ -29,7 +29,12 @@ const TextArea = forwardRef(function DefaultTextArea(
           {...props}
         />
       ) : (
-        <TextAreas className="bg-green-500 w-full h-16" ref={ref} {...props} />
+        <TextAreas
+          data-testid="textarea-test"
+          className="bg-green-500 w-full h-16"
+          ref={ref}
+          {...props}
+        />
       )}
     </>
   );

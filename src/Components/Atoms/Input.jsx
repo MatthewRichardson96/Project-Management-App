@@ -39,7 +39,12 @@ const InputResult = forwardRef(function Input(
           onChange={onChange}
         />
       ) : (
-        <Inputs className="bg-slate-400 rounded w-full" ref={ref} {...props} />
+        <Inputs
+          data-testid="input"
+          className="bg-slate-400 rounded w-full"
+          ref={ref}
+          {...props}
+        />
       )}
     </p>
   );
